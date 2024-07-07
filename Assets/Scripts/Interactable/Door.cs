@@ -36,7 +36,6 @@ public class Door : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             usable = true;
-            Debug.Log("Colided");
         }
     }
 
@@ -45,7 +44,6 @@ public class Door : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             usable = false;
-            Debug.Log("UnColided");
         }
     }
 }
