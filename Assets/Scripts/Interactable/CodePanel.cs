@@ -8,12 +8,15 @@ public class CodePanel : MonoBehaviour
     public string code;
     public TMP_Text inputText;
 
-    [Header("Door")]
-
+    [Header("Door sounds")]
     public Animator doorAnimator;
     public AudioSource doorSource;
     public AudioClip doorOpenClip;
-    
+    [Header("Code door Sounds")]
+    public AudioClip typeSound;
+    public AudioClip errorSound;
+
+    private AudioSource source;
     private FirstPersonLook playerCamera;
     private string inputCode;
     private bool usable;
@@ -21,6 +24,7 @@ public class CodePanel : MonoBehaviour
 
     private void Start()
     {
+        source = GetComponent<AudioSource>();
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
         inputText.text = null;
     }
@@ -38,11 +42,12 @@ public class CodePanel : MonoBehaviour
     }
     public void GetNumber(int number)
     {
+        source.PlayOneShot(typeSound);
         print(number);
         inputCode += number.ToString();
         inputText.text = inputCode;
     }
-    public void EnterCode()
+    public async void EnterCode()
     {
         if (inputCode == code)
         {
@@ -50,16 +55,22 @@ public class CodePanel : MonoBehaviour
             opened = true;
             doorAnimator.SetTrigger("Open");
             doorSource.PlayOneShot(doorOpenClip);
-            Debug.Log("Correct");
             codePanelObj.SetActive(false);
             uiCanvas.SetActive(true);
             playerCamera.canFollow = true;
         }
-        else
+        else 
         {
-            inputCode = null;
-            inputText.text = null;
-            Debug.Log("Incorrect");
+            Time.timeScale = 1f;
+            inputText.text = "Incorect";
+            source.PlayOneShot(errorSound);
+            inputText.color = Color.red;
+            await new WaitForSeconds(0.5f);
+            inputText.color = Color.green;
+            inputText.text = "";
+            inputCode = "";
+            Time.timeScale = 0f;
+            
         }
 
     }
