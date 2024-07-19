@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1da002be8f55f9b4a96afbc308c9235f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35808516
+      value: 2.1419148
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1da002be8f55f9b4a96afbc308c9235f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -148,6 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6f3ac2487a8d242a994bffb2c448d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewDistance: 0
+  wanderDistance: 0
+  speed: 0
+  target: {fileID: 0}
 --- !u!195 &4073207470455611695
 NavMeshAgent:
   m_ObjectHideFlags: 0

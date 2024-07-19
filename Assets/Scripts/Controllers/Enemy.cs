@@ -5,56 +5,158 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public float viewDistance;
-    public float wanderDistance;
-    public float speed;
+    public float viewDistance = 10f;
+    public float wanderDistance = 5f;
+    public float speed = 3.5f;
     public Transform target;
+    public AudioClip[] searchSounds;
+    public AudioClip[] findSounds;
 
+    private AudioSource source;
+    private Animator animator;
     private Rigidbody rb;
     private NavMeshAgent agent;
+    private bool seePlayer = false;
+    private Vector3 lastPosition;
+    private float stuckTime = 0;
+    private string currentState = "";
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
     }
 
     void Update()
     {
-        var currentSpeed = agent.velocity.magnitude;
         if (target == null) return;
+
         var distance = Vector3.Distance(transform.position, target.position);
-        if (distance < 1.5f)
+
+        if (distance < 2f)
         {
-            Debug.Log("Die");
+            // JUMPSCARE
+            speed = 0;
+            agent.isStopped = true;
+            Debug.Log("Jumpscare");
         }
-        else if (currentSpeed == 0)
+        else
         {
-            Debug.Log(gameObject.name + " is idle");
+            agent.isStopped = false;
+            agent.speed = speed;
+
+            if (distance < viewDistance)
+            {
+                // SEEK
+                if (currentState != "SEEK")
+                {
+                    PlayRandomSound(findSounds);
+                    currentState = "SEEK";
+                }
+                seePlayer = true;
+                agent.destination = target.position;
+            }
+            else
+            {
+                // SEARCH
+                if (currentState != "SEARCH")
+                {
+                    PlayRandomSound(searchSounds);
+                    currentState = "SEARCH";
+                }
+                seePlayer = false;
+                if (agent.remainingDistance < 0.5f)
+                {
+                    Wander();
+                }
+            }
+        }
+
+        CheckIfStuck();
+        UpdateAnimator();
+    }
+
+    private void PlayRandomSound(AudioClip[] sounds)
+    {
+        if (sounds.Length == 0) return;
+
+        int randomNum = Random.Range(0, sounds.Length);
+        AudioClip randomClip = sounds[randomNum];
+        source.clip = randomClip;
+        source.Play();
+    }
+
+    private void UpdateAnimator()
+    {
+        var currentSpeed = agent.velocity.magnitude;
+
+        if (currentSpeed == 0)
+        {
+            PlayAnimation("Idle");
         }
         else if (currentSpeed < 4)
         {
-            Debug.Log(gameObject.name + " is walk");
+            PlayAnimation("Run&Walk");
         }
         else
         {
-            Debug.Log(gameObject.name + " is run");
+            PlayAnimation("Run&Walk");
         }
-        agent.speed = speed;
+    }
 
-        if (distance < viewDistance)
+    private void Wander()
+    {
+        Vector3 wanderTarget = transform.position + Random.insideUnitSphere * wanderDistance;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(wanderTarget, out hit, wanderDistance, NavMesh.AllAreas))
         {
-            // SEEK
-            agent.destination = target.position;
+            agent.SetDestination(hit.position);
+        }
+    }
+
+    private void PlayAnimation(string animationName)
+    {
+        if (animator.HasState(0, Animator.StringToHash(animationName)))
+        {
+            animator.Play(animationName);
         }
         else
         {
-            // SEARCH
-            if (agent.velocity == Vector3.zero)
+            Debug.LogWarning($"Animation '{animationName}' does not exist in the Animator.");
+        }
+    }
+
+    private void CheckIfStuck()
+    {
+        if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
+        {
+            stuckTime += Time.deltaTime;
+            if (stuckTime > 1f) // если застрял более 1 секунды
             {
-                var offset = Random.insideUnitSphere * wanderDistance;
-                agent.destination = transform.position + offset;
+                Wander();
+                stuckTime = 0;
+            }
+        }
+        else
+        {
+            stuckTime = 0;
+        }
+        lastPosition = transform.position;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("Collided with wall");
+            if (!seePlayer)
+            {
+                Wander();
             }
         }
     }
+
 }
