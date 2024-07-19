@@ -5,8 +5,8 @@ public class CodePanel : MonoBehaviour
 {
     public GameObject codePanelObj;
     public GameObject uiCanvas;
-    public string code;
     public TMP_Text inputText;
+    public TMP_Text codePaperText;
 
     [Header("Door sounds")]
     public Animator doorAnimator;
@@ -16,6 +16,7 @@ public class CodePanel : MonoBehaviour
     public AudioClip typeSound;
     public AudioClip errorSound;
 
+    private string code;
     private AudioSource source;
     private FirstPersonLook playerCamera;
     private string inputCode;
@@ -23,8 +24,12 @@ public class CodePanel : MonoBehaviour
     private bool inPanel = false;
     private bool opened = false;
 
+
     private void Start()
     {
+        code = GenerateRandomCode(4);
+        codePaperText.text = code;
+        Debug.Log(code);
         source = GetComponent<AudioSource>();
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
         inputText.text = null;
@@ -49,6 +54,15 @@ public class CodePanel : MonoBehaviour
             uiCanvas.SetActive(true);
             playerCamera.canFollow = true;
         }
+    }
+    string GenerateRandomCode(int length)
+    {
+        string result = "";
+        for (int i = 0; i < length; i++)
+        {
+            result += Random.Range(0, 10).ToString();
+        }
+        return result;
     }
     public void GetNumber(int number)
     {

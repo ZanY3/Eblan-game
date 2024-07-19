@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public Transform target;
     public AudioClip[] searchSounds;
     public AudioClip[] findSounds;
+    public float soundInterval = 5f; // Интервал между воспроизведением звуков
 
     private AudioSource source;
     private Animator animator;
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
     private Vector3 lastPosition;
     private float stuckTime = 0;
     private string currentState = "";
+    private float lastSoundTime = 0f; // Время последнего воспроизведения звука
 
     void Start()
     {
@@ -77,6 +79,20 @@ public class Enemy : MonoBehaviour
 
         CheckIfStuck();
         UpdateAnimator();
+
+        // Периодически проигрывать звуки
+        if (Time.time - lastSoundTime >= soundInterval)
+        {
+            if (currentState == "SEEK")
+            {
+                PlayRandomSound(findSounds);
+            }
+            else if (currentState == "SEARCH")
+            {
+                PlayRandomSound(searchSounds);
+            }
+            lastSoundTime = Time.time;
+        }
     }
 
     private void PlayRandomSound(AudioClip[] sounds)

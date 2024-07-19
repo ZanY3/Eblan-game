@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class BatteryPicker : MonoBehaviour
 {
     public float chargeValue;
 
+    private bool picked = false;
     private bool usable = false;
     private FlashlightController fLigthController;
 
@@ -15,11 +13,14 @@ public class BatteryPicker : MonoBehaviour
         fLigthController = FindObjectOfType<FlashlightController>();
     }
 
-    private void Update()
+    private async void Update()
     {
-        if (usable && Input.GetKeyDown(KeyCode.E))
+        if (usable && !picked && Input.GetKeyDown(KeyCode.E))
         {
+            picked = true;
             fLigthController.ChargeFlight(chargeValue);
+            await new WaitForSeconds(0.15f);
+            picked = false;
         }
     }
 

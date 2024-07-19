@@ -22,10 +22,10 @@ public class KeyPicker : MonoBehaviour
     {
         if(usable && Input.GetKeyUp(KeyCode.E))
         {
+            keysController.TakeKey();
             float randPitch = Random.Range(0.7f, 1.0f);
             source.pitch = randPitch;
             source.PlayOneShot(keyPickSound);
-            keysController.TakeKey();
             Destroy(key.gameObject);
             usable = false;
         }

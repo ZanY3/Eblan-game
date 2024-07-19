@@ -7,7 +7,7 @@ public class KeysController : MonoBehaviour
 {
     public TMP_Text countText;
 
-    private int count;
+    public int count;
     
     public void TakeKey()
     {
