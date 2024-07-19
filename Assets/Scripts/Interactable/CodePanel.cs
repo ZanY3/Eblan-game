@@ -20,6 +20,7 @@ public class CodePanel : MonoBehaviour
     private FirstPersonLook playerCamera;
     private string inputCode;
     private bool usable;
+    private bool inPanel = false;
     private bool opened = false;
 
     private void Start()
@@ -32,12 +33,21 @@ public class CodePanel : MonoBehaviour
     {
         if(usable && !opened && Input.GetKeyDown(KeyCode.E))
         {
+            inPanel = true;
             Cursor.visible = !Cursor.visible;
             Cursor.lockState = CursorLockMode.None;
             playerCamera.canFollow = false;
             codePanelObj.SetActive(true);
             uiCanvas.SetActive(false);
             Time.timeScale = 0;
+        }
+        if(inPanel && Input.GetKeyDown(KeyCode.Escape))
+        {
+            inPanel = false;
+            Time.timeScale = 1f;
+            codePanelObj.SetActive(false);
+            uiCanvas.SetActive(true);
+            playerCamera.canFollow = true;
         }
     }
     public void GetNumber(int number)
