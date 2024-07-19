@@ -12,12 +12,12 @@ public class BatteryPicker : MonoBehaviour
 
     private void Start()
     {
-        fLigthController = FindAnyObjectByType<FlashlightController>();
+        fLigthController = FindObjectOfType<FlashlightController>();
     }
 
     private void Update()
     {
-        if(usable && Input.GetKeyDown(KeyCode.E))
+        if (usable && Input.GetKeyDown(KeyCode.E))
         {
             fLigthController.ChargeFlight(chargeValue);
         }
@@ -29,8 +29,8 @@ public class BatteryPicker : MonoBehaviour
         {
             usable = true;
         }
-
     }
+
     private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Battery"))

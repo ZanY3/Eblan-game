@@ -17,8 +17,6 @@ public class FlashlightController : MonoBehaviour
     private float startCharge;
     private bool canOn = true;
     private bool isOn = false;
-    private bool isTaked = true;
-
     private GameObject battery;
 
     private void Start()
@@ -29,19 +27,19 @@ public class FlashlightController : MonoBehaviour
 
     private void Update()
     {
-        if(charge <= 0)
+        if (charge <= 0)
         {
             isOn = false;
             fLight.SetActive(isOn);
             source.PlayOneShot(fOnSound);
         }
-        if(isOn)
+        if (isOn)
         {
             charge -= Time.deltaTime * 3;
-            if(charge < 0 )
+            if (charge < 0)
                 charge = 0;
         }
-        if(isTaked && charge != 0 && Input.GetKeyDown(KeyCode.F))
+        if (canOn && charge != 0 && Input.GetKeyDown(KeyCode.F))
         {
             isOn = !isOn;
             fLight.SetActive(isOn);
@@ -49,6 +47,7 @@ public class FlashlightController : MonoBehaviour
         }
         chargeText.text = (int)charge + "%";
     }
+
     public void ChargeFlight(float value)
     {
         float maxValueToPick = Mathf.Max(startCharge - value, 0);
@@ -66,11 +65,13 @@ public class FlashlightController : MonoBehaviour
             canOn = true;
         }
     }
+
     private void OnTriggerStay(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Battery"))
+        if (collision.gameObject.CompareTag("Battery"))
             battery = collision.gameObject;
     }
+
     private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Battery"))
