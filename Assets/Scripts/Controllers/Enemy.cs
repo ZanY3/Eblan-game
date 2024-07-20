@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
 
         if (distance < 2f)
         {
-            //DIE
+            // Достиг игрока
             ReachedPlayer();
             speed = 0;
             agent.isStopped = true;
@@ -64,9 +64,9 @@ public class Enemy : MonoBehaviour
             agent.isStopped = false;
             agent.speed = speed;
 
-            if (distance < viewDistance)
+            if (distance < viewDistance && CanSeePlayer())
             {
-                // SEEK
+                // ВИДИТ ИГРОКА
                 if (currentState != "SEEK")
                 {
                     PlayRandomSound(findSounds);
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                // SEARCH
+                // НЕ ВИДИТ ИГРОКА
                 if (currentState != "SEARCH")
                 {
                     PlayRandomSound(searchSounds);
@@ -119,6 +119,36 @@ public class Enemy : MonoBehaviour
         source.Play();
     }
 
+    private bool CanSeePlayer()
+    {
+        RaycastHit hit;
+        Vector3 directionToPlayer = (target.position - transform.position).normalized;
+
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, viewDistance))
+        {
+            if (hit.transform == target)
+            {
+                return true; // Враг видит игрока
+            }
+        }
+        return false; // Враг не видит игрока
+    }
+
+    void OnDrawGizmos() //для наглядности
+    {
+        if (target == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, target.position);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, viewDistance);
+
+        // Рисуем сферу радиуса блуждания
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, wanderDistance);
+    }
+
     private void UpdateAnimator()
     {
         var currentSpeed = agent.velocity.magnitude;
@@ -137,16 +167,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Wander()
-    {
-        Vector3 wanderTarget = transform.position + Random.insideUnitSphere * wanderDistance;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(wanderTarget, out hit, wanderDistance, NavMesh.AllAreas))
-        {
-            agent.SetDestination(hit.position);
-        }
-    }
-
     private void PlayAnimation(string animationName)
     {
         if (animator.HasState(0, Animator.StringToHash(animationName)))
@@ -159,12 +179,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void Wander()
+    {
+        Vector3 wanderTarget = transform.position + Random.insideUnitSphere * wanderDistance;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(wanderTarget, out hit, wanderDistance, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+        }
+    }
+
     private void CheckIfStuck()
     {
         if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
         {
             stuckTime += Time.deltaTime;
-            if (stuckTime > 1f) // если застрял более 1 секунды
+            if (stuckTime > 2.5f)
             {
                 Wander();
                 stuckTime = 0;
