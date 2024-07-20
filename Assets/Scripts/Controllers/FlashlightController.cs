@@ -25,7 +25,7 @@ public class FlashlightController : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
-    private async void Update()
+    private void Update()
     {
         if (charge <= 0)
         {
@@ -35,7 +35,7 @@ public class FlashlightController : MonoBehaviour
         }
         if (isOn)
         {
-            charge -= Time.deltaTime * 3;
+            charge -= Time.deltaTime * 2;
             if (charge < 0)
                 charge = 0;
         }
@@ -46,21 +46,22 @@ public class FlashlightController : MonoBehaviour
             source.PlayOneShot(fOnSound);
         }
         chargeText.text = (int)charge + "%";
-        await new WaitForSeconds(2f);
-        battery = null;
     }
 
     public void ChargeFlight(float value)
     {
-        float maxValueToPick = Mathf.Max(startCharge - value, 0);
-        if (charge <= maxValueToPick && battery != null)
+        if (battery != null)
         {
+            charge += value;
+            if (charge > startCharge)
+                charge = startCharge;
+
             float randPitch = Random.Range(0.7f, 1.0f);
             source.pitch = randPitch;
             source.PlayOneShot(batteryPickSound);
-            Destroy(battery.gameObject);
+
+            Destroy(battery);
             battery = null;
-            charge += value;
             canOn = true;
         }
     }

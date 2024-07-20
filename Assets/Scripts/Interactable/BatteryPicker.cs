@@ -3,24 +3,19 @@ using UnityEngine;
 public class BatteryPicker : MonoBehaviour
 {
     public float chargeValue;
-
-    private bool picked = false;
     private bool usable = false;
-    private FlashlightController fLigthController;
+    private FlashlightController fLightController;
 
     private void Start()
     {
-        fLigthController = FindObjectOfType<FlashlightController>();
+        fLightController = FindObjectOfType<FlashlightController>();
     }
 
-    private async void Update()
+    private void Update()
     {
-        if (usable && !picked && Input.GetKeyDown(KeyCode.E))
+        if (usable && Input.GetKeyDown(KeyCode.E))
         {
-            picked = true;
-            fLigthController.ChargeFlight(chargeValue);
-            await new WaitForSeconds(0.15f);
-            picked = false;
+            fLightController.ChargeFlight(chargeValue);
         }
     }
 
