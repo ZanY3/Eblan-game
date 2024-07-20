@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,6 +14,16 @@ public class Enemy : MonoBehaviour
     public AudioClip[] findSounds;
     public float soundInterval = 5f; // Интервал между воспроизведением звуков
 
+    [Header("Reached Player")]
+    public GameObject gameUi;
+    public GameObject panelUi;
+    public string restartScene = "Level 1";
+    public AudioSource reachedSource;
+    public AudioClip jumpScareSound;
+    public float timeBfrRestart = 1f;
+
+    private FirstPersonLook playerCamera;
+    private FirstPersonMovement playerMovement;
     private AudioSource source;
     private Animator animator;
     private Rigidbody rb;
@@ -25,6 +36,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        playerMovement = FindAnyObjectByType<FirstPersonMovement>();
+        playerCamera = FindAnyObjectByType<FirstPersonLook>();
         source = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -40,7 +53,8 @@ public class Enemy : MonoBehaviour
 
         if (distance < 2f)
         {
-            // JUMPSCARE
+            //DIE
+            ReachedPlayer();
             speed = 0;
             agent.isStopped = true;
             Debug.Log("Jumpscare");
@@ -161,6 +175,21 @@ public class Enemy : MonoBehaviour
             stuckTime = 0;
         }
         lastPosition = transform.position;
+    }
+
+    private async void ReachedPlayer()
+    {
+        reachedSource.PlayOneShot(jumpScareSound);
+        playerMovement.canMove = false;
+        playerCamera.canFollow = false;
+        Cursor.visible = !Cursor.visible;
+        Cursor.lockState = CursorLockMode.None;
+        gameUi.gameObject.SetActive(false);
+        source.enabled = false;
+        await new WaitForSeconds(timeBfrRestart);
+        reachedSource.enabled = false;
+        panelUi.gameObject.SetActive(true);
+
     }
 
     private void OnCollisionEnter(Collision collision)

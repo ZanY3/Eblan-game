@@ -7,7 +7,6 @@ public class FlashlightController : MonoBehaviour
 {
     public GameObject fLight;
     public AudioClip fOnSound;
-    public AudioSource source;
     public float charge;
     public TMP_Text chargeText;
 
@@ -18,6 +17,7 @@ public class FlashlightController : MonoBehaviour
     private bool canOn = true;
     private bool isOn = false;
     private GameObject battery;
+    private AudioSource source;
 
     private void Start()
     {
@@ -25,22 +25,25 @@ public class FlashlightController : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
-    private void Update()
+    private async void Update()
     {
         if (charge <= 0)
         {
             isOn = false;
             fLight.SetActive(isOn);
             source.PlayOneShot(fOnSound);
+            await new WaitForSeconds(0.3f);
+            source.enabled = false;
         }
         if (isOn)
         {
-            charge -= Time.deltaTime * 2;
+            charge -= Time.deltaTime * 1.8f;
             if (charge < 0)
                 charge = 0;
         }
         if (canOn && charge != 0 && Input.GetKeyDown(KeyCode.F))
         {
+            source.enabled = true;
             isOn = !isOn;
             fLight.SetActive(isOn);
             source.PlayOneShot(fOnSound);

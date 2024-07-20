@@ -32,7 +32,7 @@ public class HomiakDoor : MonoBehaviour
     }
     private void Update()
     {
-        if(usable && !opened &&Input.GetKeyDown(KeyCode.E))
+        if(usable && !opened && Input.GetKeyDown(KeyCode.E))
         {
             source.Play();
             gameUi.gameObject.SetActive(false);
@@ -49,7 +49,7 @@ public class HomiakDoor : MonoBehaviour
         source.PlayOneShot(clickSound);
         score++;
         scoreText.text = score.ToString();
-        if(score >= 20)
+        if(score >= 30)
         {
             Time.timeScale = 1;
             playerCamera.canFollow = true;

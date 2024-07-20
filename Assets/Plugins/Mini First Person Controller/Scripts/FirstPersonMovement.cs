@@ -10,6 +10,7 @@ public class FirstPersonMovement : MonoBehaviour
     public bool IsRunning { get; private set; }
     public float runSpeed = 9;
     public KeyCode runningKey = KeyCode.LeftShift;
+    public bool canMove = true;
 
     Rigidbody rigidbody;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
@@ -33,27 +34,30 @@ public class FirstPersonMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        staminaBar.sizeDelta = new Vector2(startStaminaBarSize * (currentStamina / maxStamina), staminaBar.sizeDelta.y);
-        if (canRun && Input.GetKey(runningKey) && currentStamina > 0)
+        if (canMove)
         {
-            IsRunning = true;
-            currentStamina -= staminaDepletionRate * Time.fixedDeltaTime;
-            currentStamina = Mathf.Max(currentStamina, 0);
-        }
-        else
-        {
-            IsRunning = false;
-            currentStamina += staminaRegenRate * Time.fixedDeltaTime;
-            currentStamina = Mathf.Min(currentStamina, maxStamina);
-        }
-        float targetMovingSpeed = IsRunning ? runSpeed : speed;
+            staminaBar.sizeDelta = new Vector2(startStaminaBarSize * (currentStamina / maxStamina), staminaBar.sizeDelta.y);
+            if (canRun && Input.GetKey(runningKey) && currentStamina > 0)
+            {
+                IsRunning = true;
+                currentStamina -= staminaDepletionRate * Time.fixedDeltaTime;
+                currentStamina = Mathf.Max(currentStamina, 0);
+            }
+            else
+            {
+                IsRunning = false;
+                currentStamina += staminaRegenRate * Time.fixedDeltaTime;
+                currentStamina = Mathf.Min(currentStamina, maxStamina);
+            }
+            float targetMovingSpeed = IsRunning ? runSpeed : speed;
 
-        if (speedOverrides.Count > 0)
-        {
-            targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
-        }
+            if (speedOverrides.Count > 0)
+            {
+                targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
+            }
 
-        Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
-        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
+            Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+            rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
+        }
     }
 }
