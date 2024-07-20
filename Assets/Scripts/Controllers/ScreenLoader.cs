@@ -7,9 +7,13 @@ public class ScreenLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider loadingBar;
+    public bool isHideUi = false;
+    public GameObject hideUi;
 
     public void LoadScene(string sceneName)
     {
+        if(isHideUi)
+            hideUi.gameObject.SetActive(false);
         LoadSceneAsync(sceneName);
     }
 

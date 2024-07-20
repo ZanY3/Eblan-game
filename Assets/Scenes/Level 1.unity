@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6030,7 +6030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &463390511
 Light:
   m_ObjectHideFlags: 0
@@ -8178,6 +8178,14 @@ PrefabInstance:
     - target: {fileID: 1820316508668732549, guid: 135506e3707c7f44780dc1acbafa4f94, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938920556104822182, guid: 135506e3707c7f44780dc1acbafa4f94, type: 3}
+      propertyPath: hideUi
+      value: 
+      objectReference: {fileID: 705369100}
+    - target: {fileID: 1938920556104822182, guid: 135506e3707c7f44780dc1acbafa4f94, type: 3}
+      propertyPath: isHideUi
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4105567129791551840, guid: 135506e3707c7f44780dc1acbafa4f94, type: 3}
       propertyPath: m_text
@@ -10701,7 +10709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &822681026
 Transform:
   m_ObjectHideFlags: 0
@@ -10757,7 +10765,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -21678,7 +21686,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 432b24d5d2d8434469e824629af80bdd, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8889a4d6666b44b4a8cd14712af25ccb, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &1908488359
 PrefabInstance:
@@ -24981,7 +24989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3488131213463030661, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: m_Radius
-      value: 0.971603
+      value: 0.8027678
       objectReference: {fileID: 0}
     - target: {fileID: 3488131213463030661, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: m_Enabled
@@ -24989,7 +24997,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3488131213463030661, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: m_Center.x
-      value: 0.06
+      value: 0.22883517
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488131213463030661, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: m_Center.y
+      value: 0.62778497
       objectReference: {fileID: 0}
     - target: {fileID: 4073207470455611695, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: m_Height
@@ -25069,7 +25081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: speed
-      value: 4
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: gameUi
@@ -25085,7 +25097,7 @@ PrefabInstance:
       objectReference: {fileID: 705369100}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: viewDistance
-      value: 10
+      value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: reachedSource
@@ -25093,7 +25105,7 @@ PrefabInstance:
       objectReference: {fileID: 828664004}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: soundInterval
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: jumpScareSound
