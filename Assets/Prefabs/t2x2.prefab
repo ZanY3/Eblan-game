@@ -425,10 +425,13 @@ MonoBehaviour:
   searchSounds:
   - {fileID: 8300000, guid: 3e4e20384b0976742ba022b7281b3d6c, type: 3}
   - {fileID: 8300000, guid: 6dea6237a16d53d46afef1a279c39924, type: 3}
+  - {fileID: 8300000, guid: 451f5d6368798474b94366c3f906709e, type: 3}
+  - {fileID: 8300000, guid: ed36f0dcbc5e0874296001230fbab4d3, type: 3}
   findSounds:
   - {fileID: 8300000, guid: ddb7b60a389527641abe8d90f2b25a35, type: 3}
   - {fileID: 8300000, guid: f7b16c5d68f148c40ac6292f0f8f11cb, type: 3}
   - {fileID: 8300000, guid: 2f5ec9bf603c46445964e2bb7b426251, type: 3}
+  - {fileID: 8300000, guid: 4a39264631b3cd34880822af2b182e87, type: 3}
   soundInterval: 10
   gameUi: {fileID: 0}
   panelUi: {fileID: 0}
