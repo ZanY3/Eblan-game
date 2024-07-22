@@ -10,6 +10,7 @@ public class ElevatorDoor : MonoBehaviour
     public AudioClip elevatorSound;
     public AudioClip errorSound;
     public float timeBtwLoad = 2f;
+    public string sceneToLoad;
 
     private AudioSource source;
     private bool usable = false;
@@ -23,6 +24,8 @@ public class ElevatorDoor : MonoBehaviour
         keyController = FindAnyObjectByType<KeysController>();
         screenLoader = FindAnyObjectByType<ScreenLoader>();
     }
+
+    
 
     private async void Update()
     {
@@ -48,7 +51,7 @@ public class ElevatorDoor : MonoBehaviour
         source.PlayOneShot(elevatorSound);
         elevatorBg.SetActive(true);
         await new WaitForSeconds(timeBtwLoad);
-        screenLoader.LoadScene("Menu");
+        screenLoader.LoadScene(sceneToLoad);
     }
 
     private void OnTriggerStay(Collider collision)
