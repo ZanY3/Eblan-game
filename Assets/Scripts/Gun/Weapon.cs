@@ -6,34 +6,36 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public GameObject shootParticles; 
+    public GameObject shootParticles;
     public Transform bulletSpawnPoint;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 10f; 
     public float fireInterval = 0.1f;
-    public float reloadTime = 2f;
+    public float reloadTime = 2f; 
     public int clipSize = 30; 
     public AudioClip shootSound;
     public AudioClip reloadSound;
     public TMP_Text ammoText;
+    public float spreadAngle = 5f;
 
-    private int currentAmmo; // “екущее количество патронов в магазине
+    private int currentAmmo; 
     private float fireCooldown = 0f;
     private bool isReloading = false;
-    private AudioSource source;
+    private AudioSource source; 
 
     private void Start()
     {
-        ammoText.text = currentAmmo.ToString() + "/" + clipSize.ToString();
         currentAmmo = clipSize;
         source = GetComponent<AudioSource>();
+        UpdateAmmoText();
     }
 
     private void Update()
     {
         if (!isReloading)
         {
-            ammoText.text = currentAmmo.ToString() + "/" + clipSize.ToString();  
+            UpdateAmmoText();
         }
+
         if (fireCooldown > 0)
         {
             fireCooldown -= Time.deltaTime;
@@ -57,8 +59,14 @@ public class Weapon : MonoBehaviour
             source.PlayOneShot(shootSound);
             Instantiate(shootParticles, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
 
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
+            Vector3 spread = new Vector3(
+                Random.Range(-spreadAngle, spreadAngle),
+                Random.Range(-spreadAngle, spreadAngle),
+                0);
+            Quaternion spreadRotation = Quaternion.Euler(spread) * bulletSpawnPoint.rotation;
+
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, spreadRotation);
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
 
             fireCooldown = fireInterval;
             currentAmmo--;
@@ -79,5 +87,11 @@ public class Weapon : MonoBehaviour
         currentAmmo = clipSize;
         Debug.Log("Reloaded!");
         isReloading = false;
+        UpdateAmmoText();
+    }
+
+    private void UpdateAmmoText()
+    {
+        ammoText.text = currentAmmo.ToString() + "/" + clipSize.ToString();
     }
 }
