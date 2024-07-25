@@ -10,6 +10,8 @@ TagManager:
   - DestroySource
   - Money
   - Trap
+  - BulletSource
+  - Bullet
   layers:
   - Default
   - TransparentFX
