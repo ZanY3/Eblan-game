@@ -3027,7 +3027,7 @@ PrefabInstance:
       objectReference: {fileID: 1507007941}
     - target: {fileID: 7519391244235133214, guid: 571249c66064aca41a87a137e62de8fe, type: 3}
       propertyPath: sceneToLoad
-      value: Menu
+      value: Intro3Lvl
       objectReference: {fileID: 0}
     - target: {fileID: 7519391244235133214, guid: 571249c66064aca41a87a137e62de8fe, type: 3}
       propertyPath: cantEnterText
