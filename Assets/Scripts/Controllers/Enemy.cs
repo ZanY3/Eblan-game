@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -212,7 +209,7 @@ public class Enemy : MonoBehaviour
         reachedSource.PlayOneShot(jumpScareSound);
         playerMovement.canMove = false;
         playerCamera.canFollow = false;
-        Cursor.visible = !Cursor.visible;
+        Cursor.visible = Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         gameUi.gameObject.SetActive(false);
         source.enabled = false;

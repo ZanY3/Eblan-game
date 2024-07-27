@@ -12644,7 +12644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9879af458ae1384b8b7f4bc0a80019c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeValue: 35
+  chargeValue: 30
 --- !u!1001 &1353272347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20742,6 +20742,10 @@ PrefabInstance:
     - target: {fileID: 5711436777255633646, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: speed
+      value: 4.65
       objectReference: {fileID: 0}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: gameUi

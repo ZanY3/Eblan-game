@@ -37,7 +37,7 @@ public class HomiakDoor : MonoBehaviour
             source.Play();
             gameUi.gameObject.SetActive(false);
             homiakUi.gameObject.SetActive(true);
-            Cursor.visible = !Cursor.visible;
+            Cursor.visible = Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             playerCamera.canFollow = false;
             Time.timeScale = 0;

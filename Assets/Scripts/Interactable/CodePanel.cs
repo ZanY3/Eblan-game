@@ -39,7 +39,7 @@ public class CodePanel : MonoBehaviour
         if(usable && !opened && Input.GetKeyDown(KeyCode.E))
         {
             inPanel = true;
-            Cursor.visible = !Cursor.visible;
+            Cursor.visible = Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             playerCamera.canFollow = false;
             codePanelObj.SetActive(true);

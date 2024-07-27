@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static Unity.VisualScripting.Member;
 
 public class Boss : MonoBehaviour
 {
@@ -54,7 +51,7 @@ public class Boss : MonoBehaviour
         weapon.enabled = false;
         playerMovement.canMove = false;
         playerCamera.canFollow = false;
-        Cursor.visible = !Cursor.visible;
+        Cursor.visible = Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         gameUi.gameObject.SetActive(false);
         await new WaitForSeconds(timeBfrRestart);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,7 +10,7 @@ public class Trap : MonoBehaviour
 
     private bool usedSound = false;
     private bool trapped = false;
-    private bool used = false;
+    //private bool used = false;
     private AudioSource source;
 
     private void Start()
@@ -43,7 +41,7 @@ public class Trap : MonoBehaviour
         if(!usedSound)
             source.PlayOneShot(catchSound);
         trapped = true;
-        used = true;
+        //used = true;
         playerRb.isKinematic = true;
         usedSound = true;
         await new WaitForSeconds(catchCd);
@@ -53,6 +51,7 @@ public class Trap : MonoBehaviour
     public void Dismiss()
     {
         trapped = false;
+        //used = false;
         playerRb.isKinematic = false;
         catchCdText.text = null;
         Destroy(gameObject);
