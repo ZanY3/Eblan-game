@@ -12,6 +12,7 @@ TagManager:
   - Trap
   - BulletSource
   - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
