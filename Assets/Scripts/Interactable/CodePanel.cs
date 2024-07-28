@@ -46,7 +46,7 @@ public class CodePanel : MonoBehaviour
             uiCanvas.SetActive(false);
             Time.timeScale = 0;
         }
-        if(inPanel && Input.GetKeyDown(KeyCode.Escape))
+        if(inPanel && Input.GetKeyDown(KeyCode.Backspace))
         {
             inPanel = false;
             Time.timeScale = 1f;

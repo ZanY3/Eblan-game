@@ -7,6 +7,7 @@ public class ButtonsController : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(sceneName);
     }
     public void LoadLink(string link)
