@@ -20923,7 +20923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: speed
-      value: 4.65
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
       propertyPath: gameUi
@@ -20937,6 +20937,46 @@ PrefabInstance:
       propertyPath: panelUi
       value: 
       objectReference: {fileID: 705369100}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: easySpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: hardSpeed
+      value: 4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: normalSpeed
+      value: 4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: viewDistance
+      value: 12.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: easyViewDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: hardViewDistance
+      value: 12.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: easyWanderDistance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: hardWanderDistance
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: normalViewDistance
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714660422041282960, guid: 268c89468ef675741b8e93f0658b6cb8, type: 3}
+      propertyPath: normalWanderDistance
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

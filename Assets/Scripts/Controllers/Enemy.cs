@@ -19,6 +19,25 @@ public class Enemy : MonoBehaviour
     public AudioClip jumpScareSound;
     public float timeBfrRestart = 1f;
 
+    [Header("Difficulty changes")]
+
+    [Header("Hard")]
+    public float hardViewDistance = 10f;
+    public float normalViewDistance = 9f;
+    public float easyViewDistance = 8f;
+
+    [Header("Normal")]
+    public float hardWanderDistance = 5f;
+    public float normalWanderDistance = 4f;
+    public float easyWanderDistance = 3f;
+
+    [Header("Easy")]
+    public float hardSpeed = 3.5f;
+    public float normalSpeed = 3f;
+    public float easySpeed = 2.8f;
+
+    private DifficultyController difficultyController;
+
     private FirstPersonLook playerCamera;
     private FirstPersonMovement playerMovement;
     private AudioSource source;
@@ -33,6 +52,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        #region settings
+        difficultyController = FindAnyObjectByType<DifficultyController>();
         playerMovement = FindAnyObjectByType<FirstPersonMovement>();
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
         source = GetComponent<AudioSource>();
@@ -40,6 +61,32 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
+        #endregion
+        #region difficulty
+        if(difficultyController != null)
+        {
+            if (difficultyController.gameDifficulty == "Hard")
+            {
+                viewDistance = hardViewDistance;
+                wanderDistance = hardWanderDistance;
+                speed = hardSpeed;
+            }
+
+            else if (difficultyController.gameDifficulty == "Normal")
+            {
+                viewDistance = normalViewDistance;
+                wanderDistance = normalWanderDistance;
+                speed = normalSpeed;
+            }
+
+            else if (difficultyController.gameDifficulty == "Easy")
+            {
+                viewDistance = easyViewDistance;
+                wanderDistance = easyWanderDistance;
+                speed = easySpeed;
+            }
+        }
+        #endregion
     }
 
     void Update()
