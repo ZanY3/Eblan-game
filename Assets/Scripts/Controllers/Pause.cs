@@ -6,6 +6,7 @@ public class Pause : MonoBehaviour
 {
     public GameObject gameUi;
     public GameObject pauseUi;
+    public GameObject settingsUi;
 
     private FirstPersonLook playerCamera;
     private bool paused = false;
@@ -37,5 +38,15 @@ public class Pause : MonoBehaviour
         paused = false;
         gameUi.SetActive(true);
         pauseUi.SetActive(false);
+    }   
+    public void OpenSettings()
+    {
+        pauseUi.SetActive(false);
+        settingsUi.SetActive(true);
     }    
+    public void CloseSettings()
+    {
+        pauseUi.SetActive(true);
+        settingsUi.SetActive(false);
+    }
 }

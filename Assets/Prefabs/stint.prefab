@@ -311,6 +311,15 @@ MonoBehaviour:
   reachedSource: {fileID: 7780934287507253274}
   jumpScareSound: {fileID: 8300000, guid: bc2437c47b04a89498c0e5302a8cefd6, type: 3}
   timeBfrRestart: 2
+  hardViewDistance: 10
+  normalViewDistance: 9
+  easyViewDistance: 8
+  hardWanderDistance: 5
+  normalWanderDistance: 4
+  easyWanderDistance: 3
+  hardSpeed: 3.5
+  normalSpeed: 3
+  easySpeed: 2.8
 --- !u!195 &8121557798322246801
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -342,7 +351,7 @@ AudioSource:
   m_GameObject: {fileID: 4547855811820680673}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 72c5029c95be73d4a929a629ff81f2e6, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.4
