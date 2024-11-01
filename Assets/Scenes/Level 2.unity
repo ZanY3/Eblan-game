@@ -17009,8 +17009,20 @@ PrefabInstance:
       value: Lamp
       objectReference: {fileID: 0}
     - target: {fileID: 4671455591498022, guid: 10fc85374832c474e940baee7f8230fb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671455591498022, guid: 10fc85374832c474e940baee7f8230fb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671455591498022, guid: 10fc85374832c474e940baee7f8230fb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671455591498022, guid: 10fc85374832c474e940baee7f8230fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.724052
+      value: -19.974052
       objectReference: {fileID: 0}
     - target: {fileID: 4671455591498022, guid: 10fc85374832c474e940baee7f8230fb, type: 3}
       propertyPath: m_LocalPosition.y

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 public class ScreenLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
-    public Slider loadingBar;
     public bool isHideUi = false;
     public GameObject hideUi;
 
@@ -29,8 +28,6 @@ public class ScreenLoader : MonoBehaviour
             // Получаем прогресс загрузки (от 0 до 1)
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
 
-            if (loadingBar != null)
-                loadingBar.value = progress;
 
             // Если загрузка завершена, активируем сцену
             if (operation.progress >= 0.9f)
