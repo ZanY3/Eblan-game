@@ -27,6 +27,7 @@ public class ButtonsController : MonoBehaviour
 
     private System.Collections.IEnumerator MoveCameraAndLoadScene(string sceneName)
     {
+        Time.timeScale = 1.0f;
         Vector3 startPosition = mainCamera.transform.position;
         Vector3 targetPosition = startPosition + new Vector3(0, cameraMoveDistance, 0);
 

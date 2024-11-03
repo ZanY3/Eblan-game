@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5420757223906935600}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.46, y: 6.5000005, z: 1}
+  m_LocalPosition: {x: -0.46, y: 8.95, z: 1.065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,7 +46,7 @@ Light:
   m_Color: {r: 1, g: 0.43867922, b: 0.43867922, a: 1}
   m_Intensity: 10
   m_Range: 3
-  m_SpotAngle: 87.1
+  m_SpotAngle: 32
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -135,10 +135,10 @@ AudioSource:
   m_GameObject: {fileID: 6387482388753460477}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 72c5029c95be73d4a929a629ff81f2e6, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.04
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -244,15 +244,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40.000477
+      value: -81.045616
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6199951
+      value: 0.4004016
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.24328
+      value: 65.6939
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       propertyPath: m_LocalRotation.w
@@ -282,6 +282,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3081994679161391779, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       propertyPath: m_Name
       value: drakeoffc
@@ -289,6 +293,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833710407382012335, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2276975
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -308,7 +316,7 @@ PrefabInstance:
       addedObject: {fileID: 2779996147609348253}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8203409073895386431}
+      addedObject: {fileID: 897417106725917092}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21e6e1879c40a784098d9975dd433a16, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5969266005760605993}
@@ -379,7 +387,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-8203409073895386431
+--- !u!114 &897417106725917092
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,13 +396,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 705653843436607811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6f3ac2487a8d242a994bffb2c448d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 757afc035b1d6834b944dfedcb3e5772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewDistance: 11
-  wanderDistance: 60
-  speed: 4.7
   target: {fileID: 0}
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  patrolPauseDuration: 4
   searchSounds:
   - {fileID: 8300000, guid: 2c7dfde58bcf71441be768240cee5ad7, type: 3}
   - {fileID: 8300000, guid: 0ddb3d3a8794a8c45bc884da84e8c1fc, type: 3}
@@ -405,22 +418,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4334a4d6bdd864245848ce2a5313e74d, type: 3}
   - {fileID: 8300000, guid: bc2437c47b04a89498c0e5302a8cefd6, type: 3}
   - {fileID: 8300000, guid: c275813687322b44c9a4146467723197, type: 3}
-  soundInterval: 5.5
+  soundInterval: 5
+  pointStopDistance: 0.4
   gameUi: {fileID: 0}
-  panelUi: {fileID: 0}
-  restartScene: Level 2
+  loseUi: {fileID: 0}
+  restartScene: Level 3
   reachedSource: {fileID: 5553771387303062273}
   jumpScareSound: {fileID: 8300000, guid: bc2437c47b04a89498c0e5302a8cefd6, type: 3}
-  timeBfrRestart: 2
-  hardViewDistance: 10
-  normalViewDistance: 9
-  easyViewDistance: 8
-  hardWanderDistance: 5
-  normalWanderDistance: 4
-  easyWanderDistance: 3
-  hardSpeed: 3.5
-  normalSpeed: 3
-  easySpeed: 2.8
+  timeBfrRestart: 1
+  isInLosePanel: 0
+  hardViewDistance: 14
+  hardSpeed: 4.8
+  normalViewDistance: 14
+  normalSpeed: 4.7
+  easyViewDistance: 13
+  easySpeed: 4.5
 --- !u!195 &5969266005760605993
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -603,7 +615,7 @@ Animator:
   m_GameObject: {fileID: 705653843436607811}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90aa4a6b051cdb540a6d4c93475d0e63, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

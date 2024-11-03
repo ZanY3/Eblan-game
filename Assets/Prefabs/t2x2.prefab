@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 1610810841318804917}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 72c5029c95be73d4a929a629ff81f2e6, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.1
@@ -340,7 +340,7 @@ PrefabInstance:
       addedObject: {fileID: 8402762185206677128}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1da002be8f55f9b4a96afbc308c9235f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6714660422041282960}
+      addedObject: {fileID: 6890946470643797148}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1da002be8f55f9b4a96afbc308c9235f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4073207470455611695}
@@ -406,7 +406,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6714660422041282960
+--- !u!114 &6890946470643797148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,39 +415,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 4902390096358856788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6f3ac2487a8d242a994bffb2c448d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 757afc035b1d6834b944dfedcb3e5772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   viewDistance: 12.5
-  wanderDistance: 60
   speed: 4.8
   target: {fileID: 0}
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  patrolPauseDuration: 4
   searchSounds:
   - {fileID: 8300000, guid: 3e4e20384b0976742ba022b7281b3d6c, type: 3}
   - {fileID: 8300000, guid: 6dea6237a16d53d46afef1a279c39924, type: 3}
   - {fileID: 8300000, guid: 451f5d6368798474b94366c3f906709e, type: 3}
   - {fileID: 8300000, guid: ed36f0dcbc5e0874296001230fbab4d3, type: 3}
   findSounds:
-  - {fileID: 8300000, guid: ddb7b60a389527641abe8d90f2b25a35, type: 3}
-  - {fileID: 8300000, guid: f7b16c5d68f148c40ac6292f0f8f11cb, type: 3}
-  - {fileID: 8300000, guid: 2f5ec9bf603c46445964e2bb7b426251, type: 3}
   - {fileID: 8300000, guid: 4a39264631b3cd34880822af2b182e87, type: 3}
-  soundInterval: 10
+  - {fileID: 8300000, guid: 2f5ec9bf603c46445964e2bb7b426251, type: 3}
+  - {fileID: 8300000, guid: f7b16c5d68f148c40ac6292f0f8f11cb, type: 3}
+  - {fileID: 8300000, guid: ddb7b60a389527641abe8d90f2b25a35, type: 3}
+  soundInterval: 6
   gameUi: {fileID: 0}
   panelUi: {fileID: 0}
   restartScene: Level 1
   reachedSource: {fileID: 3786591254180365807}
   jumpScareSound: {fileID: 8300000, guid: 19466e23b643921439eb9ef25739931d, type: 3}
   timeBfrRestart: 1
-  hardViewDistance: 10
-  normalViewDistance: 9
-  easyViewDistance: 8
-  hardWanderDistance: 5
-  normalWanderDistance: 4
-  easyWanderDistance: 3
-  hardSpeed: 3.5
-  normalSpeed: 3
-  easySpeed: 2.8
 --- !u!195 &4073207470455611695
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -503,7 +502,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 72c5029c95be73d4a929a629ff81f2e6, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

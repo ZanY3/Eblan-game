@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Pause : MonoBehaviour
@@ -9,16 +10,21 @@ public class Pause : MonoBehaviour
     public GameObject settingsUi;
 
     private FirstPersonLook playerCamera;
+
+    private Enemy enemy;
+
     private bool paused = false;
 
     private void Start()
     {
+        enemy = FindAnyObjectByType<Enemy>();
+
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !paused)
+        if(Input.GetKeyDown(KeyCode.Escape) && !paused && !enemy.isInLosePanel)
         {
             Cursor.visible = Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

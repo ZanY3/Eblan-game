@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 public class ScreenLoader : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class ScreenLoader : MonoBehaviour
 
     private async void LoadSceneAsync(string sceneName)
     {
+        Time.timeScale = 1f;
         loadingScreen.SetActive(true);
         // Начинаем асинхронную загрузку сцены
         var operation = SceneManager.LoadSceneAsync(sceneName);
