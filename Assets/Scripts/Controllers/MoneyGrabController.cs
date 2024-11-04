@@ -7,6 +7,7 @@ public class MoneyGrabController : MonoBehaviour
     public AudioClip grabSound;
     public AudioClip dropSound;
 
+    private InteractableItemClue itemClue;
     private GameObject objToTake;
     private bool taked = false;
     private AudioSource source;
@@ -14,6 +15,7 @@ public class MoneyGrabController : MonoBehaviour
 
     private void Start()
     {
+        itemClue = GameObject.FindGameObjectWithTag("Money").GetComponent<InteractableItemClue>();
         source = GetComponent<AudioSource>();
     }
 
@@ -21,10 +23,12 @@ public class MoneyGrabController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && usable && !taked)
         {
+            itemClue.isClueActive = false;
             Take();
         }
         else if (Input.GetKeyDown(KeyCode.G) && taked)
         {
+            itemClue.isClueActive = true;
             Drop();
         }
     }

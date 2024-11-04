@@ -5,6 +5,8 @@ public class InteractableItemClue : MonoBehaviour
     public Camera playerCamera;
     public LayerMask interactableLayer;
     public GameObject clueObject;
+    [HideInInspector] public bool isClueActive = true;
+
     public float maxDistance = 10f;
 
     void Start()
@@ -25,7 +27,7 @@ public class InteractableItemClue : MonoBehaviour
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, maxDistance, interactableLayer))
+        if (Physics.Raycast(ray, out hit, maxDistance, interactableLayer) && isClueActive)
         {
             clueObject.SetActive(true);
         }
