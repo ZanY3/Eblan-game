@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public Transform target;
-    public Transform[] patrolPoints; // ѕатрульные точки
-    public float patrolPauseDuration = 2f; // ѕауза между точками
+    public Transform[] patrolPoints;
+    public float patrolPauseDuration = 2f;
     public AudioClip[] searchSounds;
     public AudioClip[] findSounds;
     public float soundInterval = 5f;
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
             agent.isStopped = false;
             agent.speed = speed;
 
-            // ќбновл€ем состо€ние видимости игрока
+            // ѕроверка на видимость игрока
             seePlayer = distance < viewDistance && CanSeePlayer();
 
             if (seePlayer)
@@ -100,7 +100,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                if (currentState != "PATROL")
+                if (currentState != "PATROL" && !isPaused)
                 {
                     PlayRandomSound(searchSounds);
                     currentState = "PATROL";
@@ -177,54 +177,42 @@ public class Enemy : MonoBehaviour
     {
         float currentSpeed = agent.velocity.magnitude;
 
-        if (currentSpeed <= 1)
-        {
-            animator.SetBool("isRunning", false);
-        }
-        else
-        {
-            animator.SetBool("isRunning", true);
-        }
+        animator.SetBool("isRunning", currentSpeed > 1);
     }
 
     private IEnumerator Patrol()
     {
         while (true)
         {
-            // ѕровер€ем, что враг не видит игрока и есть патрульные точки
-            if (!seePlayer && patrolPoints.Length > 0)
+            if (!seePlayer && patrolPoints.Length > 0 && !isPaused)
             {
                 agent.SetDestination(patrolPoints[currentPatrolIndex].position);
 
-                // ∆дем, пока враг достигнет точки или пока не увидит игрока
-                yield return new WaitUntil(() => agent.remainingDistance <= agent.stoppingDistance + pointStopDistance || seePlayer);
+                yield return new WaitUntil(() => 
+                    agent.remainingDistance <= agent.stoppingDistance + pointStopDistance || seePlayer);
 
-                if (seePlayer) continue; // ѕрерываем ожидание, если враг увидел игрока
+                if (seePlayer) continue;
 
-                // ¬ключаем паузу на патрульной точке
                 isPaused = true;
                 float pauseEndTime = Time.time + patrolPauseDuration;
 
                 while (Time.time < pauseEndTime)
                 {
-                    // ѕровер€ем видимость игрока каждый кадр во врем€ паузы
                     seePlayer = CanSeePlayer();
                     if (seePlayer)
                     {
                         isPaused = false;
-                        break; // ѕрерываем паузу, если враг увидел игрока
+                        break;
                     }
                     yield return null;
                 }
 
                 if (seePlayer)
                 {
-                    // ѕрерываем патруль и начинаем преследование игрока
                     isPaused = false;
                     continue;
                 }
 
-                // ѕереходим к следующей патрульной точке
                 currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
                 isPaused = false;
             }

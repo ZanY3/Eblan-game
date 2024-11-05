@@ -18,6 +18,9 @@ public class RotateObject : MonoBehaviour
     private bool isRotated = false; // Текущее состояние вращения
     private AudioSource audioSource; // Компонент AudioSource
 
+    // Статическая переменная для отслеживания активного объекта вращения
+    private static RotateObject activeRotatingObject;
+
     void Start()
     {
         // Сохраняем начальное вращение объекта
@@ -48,6 +51,15 @@ public class RotateObject : MonoBehaviour
     {
         if (!isRotating)
         {
+            // Если уже есть активный объект, вернуть его в исходное положение
+            if (activeRotatingObject != null && activeRotatingObject != this)
+            {
+                activeRotatingObject.ResetRotation();
+            }
+
+            // Устанавливаем текущий объект как активный для вращения
+            activeRotatingObject = this;
+
             // Устанавливаем целевое вращение в зависимости от текущего состояния
             targetRotation = isRotated ? startRotation : startRotation * Quaternion.Euler(rotationAngle);
 
@@ -62,5 +74,19 @@ public class RotateObject : MonoBehaviour
             isRotating = true;
         }
     }
-}
 
+    // Метод для возврата объекта в начальное положение
+    public void ResetRotation()
+    {
+        // Устанавливаем целевое вращение на начальное положение
+        targetRotation = startRotation;
+        isRotated = false;
+        isRotating = true;
+
+        // Очищаем активный вращающийся объект
+        if (activeRotatingObject == this)
+        {
+            activeRotatingObject = null;
+        }
+    }
+}
