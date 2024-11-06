@@ -21,7 +21,6 @@ public class Enemy : MonoBehaviour
     public AudioSource reachedSource;
     public AudioClip jumpScareSound;
     public float timeBfrRestart = 1f;
-    [HideInInspector] public bool isInLosePanel = false;
 
     [Header("Difficulty settings")]
 
@@ -51,6 +50,7 @@ public class Enemy : MonoBehaviour
     private float lastSoundTime = 0f;
     private bool isPaused = false;
     private bool playedReachedSound = false;
+    private Pause pause;
 
     void Start()
     {
@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
         source = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        pause = FindAnyObjectByType<Pause>();
 
         SetDifficultySettings();
 
@@ -228,7 +229,7 @@ public class Enemy : MonoBehaviour
             playedReachedSound = true;
         }
         playerMovement.enabled = false;
-        isInLosePanel = true;
+        pause.canPause = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         playerCamera.canFollow = false;

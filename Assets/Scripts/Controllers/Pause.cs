@@ -9,22 +9,22 @@ public class Pause : MonoBehaviour
     public GameObject pauseUi;
     public GameObject settingsUi;
 
+    [HideInInspector] public bool canPause = true;
+
     private FirstPersonLook playerCamera;
 
-    private Enemy enemy;
 
     private bool paused = false;
 
     private void Start()
     {
-        enemy = FindAnyObjectByType<Enemy>();
 
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !paused && !enemy.isInLosePanel)
+        if(Input.GetKeyDown(KeyCode.Escape) && !paused && canPause)
         {
             Cursor.visible = Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

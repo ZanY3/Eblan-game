@@ -23,17 +23,20 @@ public class HomiakDoor : MonoBehaviour
     private AudioSource source;
     private bool usable = false;
     private bool opened = false;
+    private Pause pause;
 
     private void Start()
     {
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
         scoreText.text = "0";
         source = GetComponent<AudioSource>();
+        pause = FindAnyObjectByType<Pause>();
     }
     private void Update()
     {
         if(usable && !opened && Input.GetKeyDown(KeyCode.E))
         {
+            pause.canPause = false;
             source.Play();
             gameUi.gameObject.SetActive(false);
             homiakUi.gameObject.SetActive(true);
@@ -51,6 +54,7 @@ public class HomiakDoor : MonoBehaviour
         scoreText.text = score.ToString();
         if(score >= 30)
         {
+            pause.canPause = true;
             Time.timeScale = 1;
             playerCamera.canFollow = true;
             source.PlayOneShot(finishSound);

@@ -16,6 +16,7 @@ public class CodePanel : MonoBehaviour
     public AudioClip typeSound;
     public AudioClip errorSound;
 
+    private Pause pause;
     private string code;
     private AudioSource source;
     private FirstPersonLook playerCamera;
@@ -33,11 +34,13 @@ public class CodePanel : MonoBehaviour
         source = GetComponent<AudioSource>();
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
         inputText.text = null;
+        pause = FindAnyObjectByType<Pause>();
     }
     private void Update()
     {
         if(usable && !opened && Input.GetKeyDown(KeyCode.E))
         {
+            pause.canPause = false;
             inPanel = true;
             Cursor.visible = Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -48,6 +51,7 @@ public class CodePanel : MonoBehaviour
         }
         if(inPanel && Input.GetKeyDown(KeyCode.Backspace))
         {
+            pause.canPause = true;
             inPanel = false;
             Time.timeScale = 1f;
             codePanelObj.SetActive(false);
@@ -75,6 +79,7 @@ public class CodePanel : MonoBehaviour
     {
         if (inputCode == code)
         {
+            pause.canPause = true;
             Time.timeScale = 1f;
             opened = true;
             doorAnimator.SetTrigger("Open");
