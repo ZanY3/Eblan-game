@@ -6,8 +6,8 @@ public class MoneyGrabController : MonoBehaviour
     public Transform dropPos;
     public AudioClip grabSound;
     public AudioClip dropSound;
+    public InteractableItemClue itemClue;
 
-    private InteractableItemClue itemClue;
     private GameObject objToTake;
     private bool taked = false;
     private AudioSource source;
@@ -15,7 +15,6 @@ public class MoneyGrabController : MonoBehaviour
 
     private void Start()
     {
-        itemClue = GameObject.FindGameObjectWithTag("Money").GetComponent<InteractableItemClue>();
         source = GetComponent<AudioSource>();
     }
 

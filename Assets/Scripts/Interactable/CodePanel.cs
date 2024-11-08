@@ -54,6 +54,8 @@ public class CodePanel : MonoBehaviour
             pause.canPause = true;
             inPanel = false;
             Time.timeScale = 1f;
+            Cursor.visible = Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             codePanelObj.SetActive(false);
             uiCanvas.SetActive(true);
             playerCamera.canFollow = true;
@@ -82,6 +84,8 @@ public class CodePanel : MonoBehaviour
             pause.canPause = true;
             Time.timeScale = 1f;
             opened = true;
+            Cursor.visible = Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             doorAnimator.SetTrigger("Open");
             doorSource.PlayOneShot(doorOpenClip);
             codePanelObj.SetActive(false);

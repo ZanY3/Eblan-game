@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ElevatorDoor : MonoBehaviour
@@ -11,26 +12,46 @@ public class ElevatorDoor : MonoBehaviour
     public AudioClip errorSound;
     public float timeBtwLoad = 2f;
     public string sceneToLoad;
+    public bool isElectroPanels = false;
 
+    [Space]
+    [Header("ONLY FOR 3 LVL")]
+    public GameObject lightObj;
+    
     private AudioSource source;
     private bool usable = false;
-    private bool canEnter = false;
+    public bool canEnter = false;
     private KeysController keyController;
     private ScreenLoader screenLoader;
+    private ElectroPanelKeyController elPanelKeyController;
 
     private void Start()
     {
         source = GetComponent<AudioSource>();
         keyController = FindAnyObjectByType<KeysController>();
         screenLoader = FindAnyObjectByType<ScreenLoader>();
+        if (isElectroPanels)
+        { 
+            elPanelKeyController = FindAnyObjectByType<ElectroPanelKeyController>();
+        }
     }
 
-    
-
+ 
     private async void Update()
     {
-        if(keyController.count >= 10)
-            canEnter = true;
+        if(!isElectroPanels)
+        {
+            if(keyController.count >= 10)
+                canEnter = true;
+        }
+        else
+        {
+            if(elPanelKeyController.count >= 2)
+                lightObj.SetActive(true);
+
+            if (elPanelKeyController.count >= 6)
+                canEnter = true;
+        }
 
         if(usable && canEnter && Input.GetKeyDown(KeyCode.E))
         {

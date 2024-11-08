@@ -59,6 +59,10 @@ public class HomiakDoor : MonoBehaviour
             playerCamera.canFollow = true;
             source.PlayOneShot(finishSound);
             opened = true;
+
+            Cursor.visible = Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
             doorAnimator.SetTrigger("Open");
             doorSource.PlayOneShot(doorOpenClip);
             gameUi.gameObject.SetActive(true);

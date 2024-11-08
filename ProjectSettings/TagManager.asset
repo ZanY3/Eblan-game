@@ -13,6 +13,7 @@ TagManager:
   - BulletSource
   - Bullet
   - Enemy
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
