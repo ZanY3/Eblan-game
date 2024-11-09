@@ -20,7 +20,7 @@ public class ElevatorDoor : MonoBehaviour
     
     private AudioSource source;
     private bool usable = false;
-    public bool canEnter = false;
+    private bool canEnter = false;
     private KeysController keyController;
     private ScreenLoader screenLoader;
     private ElectroPanelKeyController elPanelKeyController;
@@ -46,7 +46,7 @@ public class ElevatorDoor : MonoBehaviour
         }
         else
         {
-            if(elPanelKeyController.count >= 2)
+            if(elPanelKeyController.count >= 3)
                 lightObj.SetActive(true);
 
             if (elPanelKeyController.count >= 6)
