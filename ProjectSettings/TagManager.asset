@@ -14,6 +14,7 @@ TagManager:
   - Bullet
   - Enemy
   - FxTemporaire
+  - CatchObj
   layers:
   - Default
   - TransparentFX

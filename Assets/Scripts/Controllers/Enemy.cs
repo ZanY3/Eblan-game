@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     public float easySpeed = 2.8f;
 
     private float viewDistance = 10f;
-    private float speed = 3.5f;
+    [HideInInspector] public float speed = 3.5f;
     private DifficultyController difficultyController;
     private FirstPersonLook playerCamera;
     private FirstPersonMovement playerMovement;

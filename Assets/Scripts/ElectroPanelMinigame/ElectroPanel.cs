@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ElectroPanel : MonoBehaviour
 {
     public GameObject gameUi;
     public GameObject miniGameUi;
     public AudioClip miniGamePassSound;
+    public bool stopTime = true;
 
+    private Enemy enemy;
     private bool finished = false;
     private Pause pause;
     private FirstPersonLook fpsLook;
@@ -15,9 +18,12 @@ public class ElectroPanel : MonoBehaviour
     private bool usable = false;
     private bool opened = false;
     private AudioSource source;
+    private float enemySpeed;
 
     private void Start()
     {
+        movement = FindAnyObjectByType<FirstPersonMovement>();
+        enemy = FindAnyObjectByType<Enemy>();
         source = GetComponent<AudioSource>();
         fpsLook = FindAnyObjectByType<FirstPersonLook>();
         pause = FindAnyObjectByType<Pause>();
@@ -27,7 +33,14 @@ public class ElectroPanel : MonoBehaviour
     {
         if (usable && !opened && Input.GetKeyDown(KeyCode.E) && !finished)
         {
-            Time.timeScale = 0f;
+            if(stopTime)
+                Time.timeScale = 0f;
+            else
+            {
+                enemySpeed = enemy.speed;
+                enemy.speed = 0f;
+            }
+
             Cursor.visible = Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             miniGameUi.SetActive(true);
@@ -40,6 +53,7 @@ public class ElectroPanel : MonoBehaviour
         }
         else if (opened && Input.GetKeyDown(KeyCode.Backspace))
         {
+            enemy.speed = enemySpeed;
             Time.timeScale = 1f;
             miniGameUi.SetActive(false);
             gameUi.SetActive(true);
@@ -55,6 +69,7 @@ public class ElectroPanel : MonoBehaviour
     }
     public void EndMiniGame()
     {
+        enemy.speed = enemySpeed;
         Time.timeScale = 1f;
         finished = true;
         source.PlayOneShot(miniGamePassSound);
