@@ -284,8 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9041c443901404697767d2d6a1a563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBfrStart: 5
-  loadSceneName: Level 2
+  timeBfrStart: 7.5
+  loadSceneName: Level 3
   canSkip: 0
 --- !u!4 &296686759
 Transform:
@@ -629,7 +629,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145246560}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 076dd873860839642a35dd3c3a3cd66c, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: ae07dd7291ea69c4db9018fa4ce572d8, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 586412307}
@@ -684,7 +684,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 72c5029c95be73d4a929a629ff81f2e6, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
