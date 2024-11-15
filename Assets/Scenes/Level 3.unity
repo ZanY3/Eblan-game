@@ -19535,19 +19535,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: hardSpeed
-      value: 5.6
+      value: 5.45
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: normalSpeed
-      value: 5.35
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: soundInterval
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
+      propertyPath: jumpScareSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ba7e2aff3ef6c144ab45161818bb2011, type: 3}
+    - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: hardViewDistance
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: findSounds.Array.size

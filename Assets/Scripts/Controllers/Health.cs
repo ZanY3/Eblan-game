@@ -3,14 +3,12 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float health;
-    public float maxHealth;
     public AudioSource dieSource;
     public AudioClip dieSound;
     public AudioClip damageSound;
     public GameObject dieParticles;
     public GameObject damageParticles;
 
-    public GameObject finishPortal;
     private EndController endController;
 
     private void Start()
@@ -30,7 +28,6 @@ public class Health : MonoBehaviour
             endController.enemyesLeft--;
             dieSource.PlayOneShot(dieSound);
             Instantiate(dieParticles, transform.position, Quaternion.identity);
-            finishPortal.SetActive(true);
             Destroy(gameObject);
         }
     }
