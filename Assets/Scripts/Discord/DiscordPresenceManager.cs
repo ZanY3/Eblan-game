@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Для управления сценами
 using Discord;
 
 public class DiscordPresenceManager : MonoBehaviour
@@ -9,14 +10,7 @@ public class DiscordPresenceManager : MonoBehaviour
     [Header("Настройки приложения Discord")]
     public long applicationId = 123456789012345678; // Замените на ваш Discord Application ID
 
-    [Header("Основной статус")]
-    public string state = "В меню";
-    public string details = "Проходит 1-й уровень";
-
-    [Header("Время активности")]
-    public bool useTime = true;
-    
-    [Header("Изображения")]
+    [Header("Изображения по умолчанию")]
     public string largeImageKey = "main_icon";
     public string largeImageText = "Название игры";
     public string smallImageKey = "small_icon";
@@ -33,21 +27,19 @@ public class DiscordPresenceManager : MonoBehaviour
 
         try
         {
-            // Попытка создать объект Discord SDK
             discord = new Discord.Discord(applicationId, (UInt64)Discord.CreateFlags.Default);
             Debug.Log("Объект Discord SDK создан успешно.");
 
             if (discord != null)
             {
-                // Попытка получить Activity Manager
                 activityManager = discord.GetActivityManager();
-                Debug.Log("Activity Manager получен успешно.");
-
                 isInitialized = activityManager != null;
+
                 if (isInitialized)
                 {
                     Debug.Log("Discord SDK успешно инициализирован.");
-                    UpdatePresence(); // Обновляем статус после инициализации
+                    UpdatePresence(SceneManager.GetActiveScene().name); // Устанавливаем статус для текущей сцены
+                    SceneManager.sceneLoaded += OnSceneLoaded; // Подписываемся на событие смены сцены
                 }
                 else
                 {
@@ -65,13 +57,27 @@ public class DiscordPresenceManager : MonoBehaviour
         }
     }
 
-    void UpdatePresence()
+    void UpdatePresence(string sceneName)
     {
         if (!isInitialized)
         {
             Debug.LogWarning("Discord SDK не был инициализирован. UpdatePresence() отменен.");
             return;
         }
+
+        // Настраиваем Rich Presence в зависимости от названия сцены
+        string state = $"Уничтожает ебланов";
+        string details = sceneName switch
+        {
+            "Trailer" => "Пробирается в подвал ебланов",
+            "Menu" => "Возле подвала ебланов",
+            "Level1" => "На этаже T2X2",
+            "Level2" => "На этаже Дрейка",
+            "Level3" => "На этаже Стинта",
+            "LastFight" => "Сражается с ебланами",
+            "EndTrailer" => "Победил ебланов",
+            _ => "Под столом ебланов"
+        };
 
         var activity = new Discord.Activity
         {
@@ -86,21 +92,24 @@ public class DiscordPresenceManager : MonoBehaviour
             }
         };
 
-        if (useTime)
+        activity.Timestamps = new Discord.ActivityTimestamps
         {
-            activity.Timestamps = new Discord.ActivityTimestamps
-            {
-                Start = DateTimeOffset.Now.ToUnixTimeMilliseconds()
-            };
-        }
+            Start = DateTimeOffset.Now.ToUnixTimeMilliseconds()
+        };
 
         activityManager.UpdateActivity(activity, result =>
         {
             if (result == Discord.Result.Ok)
-                Debug.Log("Rich Presence успешно обновлен!");
+                Debug.Log($"Rich Presence обновлен для сцены: {sceneName}");
             else
                 Debug.LogError("Ошибка обновления Rich Presence.");
         });
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"Сцена загружена: {scene.name}");
+        UpdatePresence(scene.name);
     }
 
     void Update()
@@ -108,10 +117,6 @@ public class DiscordPresenceManager : MonoBehaviour
         if (isInitialized && discord != null)
         {
             discord.RunCallbacks();
-        }
-        else
-        {
-            Debug.LogWarning("Discord SDK не инициализирован.");
         }
     }
 
@@ -124,4 +129,3 @@ public class DiscordPresenceManager : MonoBehaviour
         }
     }
 }
-

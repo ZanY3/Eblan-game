@@ -4601,6 +4601,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2859854579037663310, guid: 61d4dbdc6f04d904a9661c82f41b59f1, type: 3}
   m_PrefabInstance: {fileID: 367941267}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &385227385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 385227387}
+  - component: {fileID: 385227386}
+  m_Layer: 0
+  m_Name: DiscordController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &385227386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385227385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81df98e0bbe443749bd8f12775a2782b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applicationId: 1301847634495012878
+  largeImageKey: image
+  largeImageText: Escape the Eblans
+  smallImageKey: small_icon
+  smallImageText: "\u0422\u0438\u043F\u043E \u043A\u0440\u0443\u0442\u043E\u0439"
+--- !u!4 &385227387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385227385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -48.31723, y: 23.275963, z: 31.535872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &398931451
 GameObject:
   m_ObjectHideFlags: 0
@@ -24541,3 +24590,4 @@ SceneRoots:
   - {fileID: 716191725}
   - {fileID: 331499942}
   - {fileID: 478154811}
+  - {fileID: 385227387}
