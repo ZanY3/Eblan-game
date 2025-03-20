@@ -18,7 +18,6 @@ public class Pause : MonoBehaviour
 
     private void Start()
     {
-
         playerCamera = FindAnyObjectByType<FirstPersonLook>();
     }
 
