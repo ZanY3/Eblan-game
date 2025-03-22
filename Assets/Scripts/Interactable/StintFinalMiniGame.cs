@@ -6,16 +6,25 @@ public class StintFinalMiniGame : MonoBehaviour
 {
     public GameObject GameUi;
     public GameObject MiniGameUi;
+    public GameObject CumDrinkBtn;
     public GameObject PressEClue;
 
     [Header("Cups")]
     public GameObject LeftCup;
     public GameObject RightCup;
 
+    [Header("Audio")]
+    public AudioClip DrinkSounds;
+    public AudioClip StartTutorVoice;
+    public AudioClip CumSelectVoice;
+    public AudioClip GoodSelectVoice;
+
     private FirstPersonLook playerCamera;
     private Pause _pause;
     private bool _inGame = false;
     private bool _usable = false;
+    private bool _selected = false;
+    private AudioSource _source;
 
     private void Start()
     {
@@ -25,7 +34,7 @@ public class StintFinalMiniGame : MonoBehaviour
 
     private void Update()
     {
-        if (_usable && !_inGame && Input.GetKeyDown(KeyCode.E))
+        if (_usable && !_inGame && Input.GetKeyDown(KeyCode.E) && !_selected)
         {
             _pause.canPause = false;
             _inGame = true;
@@ -38,19 +47,45 @@ public class StintFinalMiniGame : MonoBehaviour
         }
     }
 
-    public void RCupSelected()
+    public void OpenCups()
     {
-        //cum drink
-        //end
+        _selected = true;
+        RightCup.GetComponent<Animator>().SetTrigger("Open");
+        LeftCup.GetComponent<Animator>().SetTrigger("Open");
     }
-    public void LCupSelected()
+    public async void CumCupSelected()
     {
-        //end
+        if (!_selected)
+        {
+            _source.PlayOneShot(CumSelectVoice);
+            await new WaitForSeconds(8.5f);
+            CumDrinkBtn.SetActive(true);
+        }
+    }
+    public void Drink()
+    {
+        _source.PlayOneShot(DrinkSounds);
+        EndGame();
+    }
+    public async void GoodCupSelected()
+    {
+        if (!_selected)
+        {
+            _source.PlayOneShot(GoodSelectVoice);
+            await new WaitForSeconds(4);
+            EndGame();
+        }
     }
 
     public void EndGame()
     {
-        //end
+        _pause.canPause = true;
+        GameUi.SetActive(true);
+        Cursor.visible = Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        playerCamera.canFollow = true;
+        Time.timeScale = 1;
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
