@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class StintFinalMiniGame : MonoBehaviour
 {
+    [Header("Ui")]
     public GameObject GameUi;
     public GameObject MiniGameUi;
     public GameObject CumDrinkBtn;
     public GameObject PressEClue;
+
+    [Header("Objects to off")]
+    public GameObject Player;
+    public Enemy Enemy;
 
     [Header("Cups")]
     public GameObject LeftCup;
@@ -19,31 +24,39 @@ public class StintFinalMiniGame : MonoBehaviour
     public AudioClip CumSelectVoice;
     public AudioClip GoodSelectVoice;
 
-    private FirstPersonLook playerCamera;
+    private FirstPersonLook _playerCamera;
     private Pause _pause;
     private bool _inGame = false;
     private bool _usable = false;
     private bool _selected = false;
+    private bool _canSelect = false;
     private AudioSource _source;
 
     private void Start()
     {
-        playerCamera = FindAnyObjectByType<FirstPersonLook>();
+        _source = GetComponent<AudioSource>();
+        _playerCamera = FindAnyObjectByType<FirstPersonLook>();
         _pause = FindAnyObjectByType<Pause>();
     }
 
-    private void Update()
+    private async void Update()
     {
         if (_usable && !_inGame && Input.GetKeyDown(KeyCode.E) && !_selected)
         {
+            Enemy.enabled = false;
+            Player.GetComponent<FirstPersonMovement>().enabled = false;
+            Player.GetComponent<Crouch>().enabled = false;
+            Player.GetComponent<FlashlightController>().enabled = false;
             _pause.canPause = false;
             _inGame = true;
             GameUi.SetActive(false);
             MiniGameUi.SetActive(true);
             Cursor.visible = Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            playerCamera.canFollow = false;
-            Time.timeScale = 0;
+            _playerCamera.canFollow = false;
+            _source.PlayOneShot(StartTutorVoice);
+            await new WaitForSeconds(12f);
+            _canSelect = true;
         }
     }
 
@@ -55,7 +68,7 @@ public class StintFinalMiniGame : MonoBehaviour
     }
     public async void CumCupSelected()
     {
-        if (!_selected)
+        if (!_selected && _canSelect)
         {
             OpenCups();
             _source.PlayOneShot(CumSelectVoice);
@@ -63,14 +76,15 @@ public class StintFinalMiniGame : MonoBehaviour
             CumDrinkBtn.SetActive(true);
         }
     }
-    public void Drink()
+    public async void Drink()
     {
         _source.PlayOneShot(DrinkSounds);
+        await new WaitForSeconds(1.4f);
         EndGame();
     }
     public async void GoodCupSelected()
     {
-        if (!_selected)
+        if (!_selected && _canSelect)
         {
             OpenCups();
             _source.PlayOneShot(GoodSelectVoice);
@@ -81,24 +95,29 @@ public class StintFinalMiniGame : MonoBehaviour
 
     public void EndGame()
     {
+        Player.GetComponent<FirstPersonMovement>().enabled = transform;
+        Player.GetComponent<Crouch>().enabled = true;
+        Player.GetComponent<FlashlightController>().enabled = true;
+        PressEClue.SetActive(false);
         _pause.canPause = true;
         GameUi.SetActive(true);
+        MiniGameUi.SetActive(false);
         Cursor.visible = Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
-        playerCamera.canFollow = true;
-        Time.timeScale = 1;
+        _playerCamera.canFollow = true;
+        Enemy.enabled = true;
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             _usable = true;
             PressEClue.SetActive(true);
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

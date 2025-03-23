@@ -8196,8 +8196,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 6.27451, y: -177.2549}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &853906690
 MonoBehaviour:
@@ -12373,6 +12373,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 675105736114103379, guid: 198ba3a6fd0613a4b8b5df589d8a5d1b, type: 3}
   m_PrefabInstance: {fileID: 1341810102}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1348570865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
+  m_PrefabInstance: {fileID: 3360326109983714057}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757afc035b1d6834b944dfedcb3e5772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1351078933 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1773623360729482, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
@@ -14050,13 +14061,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -16510,6 +16521,8 @@ MonoBehaviour:
   MiniGameUi: {fileID: 1694669773}
   CumDrinkBtn: {fileID: 853906688}
   PressEClue: {fileID: 876944116}
+  Player: {fileID: 1351078933}
+  Enemy: {fileID: 1348570865}
   LeftCup: {fileID: 328502842}
   RightCup: {fileID: 374516421}
   DrinkSounds: {fileID: 8300000, guid: c40dfa07d57536f4c9c3a8ef0b5ea38e, type: 3}
@@ -16525,7 +16538,7 @@ AudioSource:
   m_GameObject: {fileID: 1784188548}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 72c5029c95be73d4a929a629ff81f2e6, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -21195,6 +21208,18 @@ PrefabInstance:
       propertyPath: searchSounds.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: acc220ea3229aac479d04056d7fa514c, type: 3}
+    - target: {fileID: 2413873033994004259, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413873033994004259, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413873033994004259, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2413873033994004259, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -72.045616

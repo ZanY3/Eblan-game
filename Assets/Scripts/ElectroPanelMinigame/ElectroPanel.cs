@@ -37,8 +37,7 @@ public class ElectroPanel : MonoBehaviour
                 Time.timeScale = 0f;
             else
             {
-                enemySpeed = enemy.speed;
-                enemy.speed = 0f;
+                enemy.GetComponent<Enemy>().enabled = false;
             }
 
             Cursor.visible = Cursor.visible = true;
@@ -53,7 +52,7 @@ public class ElectroPanel : MonoBehaviour
         }
         else if (opened && Input.GetKeyDown(KeyCode.Backspace))
         {
-            enemy.speed = enemySpeed;
+            enemy.GetComponent<Enemy>().enabled = transform;
             Time.timeScale = 1f;
             miniGameUi.SetActive(false);
             gameUi.SetActive(true);
@@ -69,7 +68,7 @@ public class ElectroPanel : MonoBehaviour
     }
     public void EndMiniGame()
     {
-        enemy.speed = enemySpeed;
+        enemy.GetComponent<Enemy>().enabled = true;
         Time.timeScale = 1f;
         finished = true;
         source.PlayOneShot(miniGamePassSound);
