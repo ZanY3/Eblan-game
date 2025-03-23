@@ -57,6 +57,7 @@ public class StintFinalMiniGame : MonoBehaviour
     {
         if (!_selected)
         {
+            OpenCups();
             _source.PlayOneShot(CumSelectVoice);
             await new WaitForSeconds(8.5f);
             CumDrinkBtn.SetActive(true);
@@ -71,6 +72,7 @@ public class StintFinalMiniGame : MonoBehaviour
     {
         if (!_selected)
         {
+            OpenCups();
             _source.PlayOneShot(GoodSelectVoice);
             await new WaitForSeconds(4);
             EndGame();
