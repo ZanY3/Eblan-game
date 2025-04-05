@@ -36,9 +36,9 @@ public class WallPress : MonoBehaviour
 
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    public void OnChildCollisionEnter()
     {
-        if(collision.gameObject.CompareTag("Box") && _isActive)
+        if (_isActive)
         {
             _lvlController.BoxDestroy();
         }
