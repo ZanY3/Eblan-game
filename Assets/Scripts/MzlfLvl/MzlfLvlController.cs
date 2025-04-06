@@ -9,10 +9,12 @@ public class MzlfLvlController : MonoBehaviour
     public GameObject GameUi;
     public GameObject LoseUi;
     public GameObject Box;
+    public Animator StartWallAnim;
 
     [Header("Sounds")]
     public AudioClip BoxDestroySound;
     public AudioClip DefeatSound;
+    public AudioClip StartWallSound;
 
     private FirstPersonLook _playerCamera;
     private Pause _pause;
@@ -42,6 +44,13 @@ public class MzlfLvlController : MonoBehaviour
 
 
     }
+    public void StartTheGame() //на кнопку открывается
+    {
+        _source.PlayOneShot(StartWallSound);
+        StartWallAnim.SetTrigger("Open");
+        //game start
+    }
+
     public void BoxDestroy()
     {
         Destroy(Box);
