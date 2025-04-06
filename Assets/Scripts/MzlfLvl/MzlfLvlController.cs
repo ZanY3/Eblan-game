@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 
 public class MzlfLvlController : MonoBehaviour
 {
@@ -9,12 +8,19 @@ public class MzlfLvlController : MonoBehaviour
     public GameObject GameUi;
     public GameObject LoseUi;
     public GameObject Box;
+    public GameObject Obstacles;
     public Animator StartWallAnim;
 
     [Header("Sounds")]
     public AudioClip BoxDestroySound;
     public AudioClip DefeatSound;
-    public AudioClip StartWallSound;
+    public AudioClip GarageOpenSound;
+    public AudioClip BgMusic;
+    public AudioClip StartSound;
+
+    [Header("Timer")]
+    public float GameTime;
+
 
     private FirstPersonLook _playerCamera;
     private Pause _pause;
@@ -23,11 +29,14 @@ public class MzlfLvlController : MonoBehaviour
 
     private void Start()
     {
+        Obstacles.SetActive(false);
+        _source = GetComponent<AudioSource>();
+        _source.PlayOneShot(StartSound);
+
         _playerCamera = FindAnyObjectByType<FirstPersonLook>();
         _pause = FindAnyObjectByType<Pause>();
         _playerMovement = FindAnyObjectByType<FirstPersonMovement>();
 
-        _source = GetComponent<AudioSource>();
     }
 
     public async void Die()
@@ -46,9 +55,11 @@ public class MzlfLvlController : MonoBehaviour
     }
     public void StartTheGame() //на кнопку открывается
     {
-        _source.PlayOneShot(StartWallSound);
+        Obstacles.SetActive(true);
+        _source.PlayOneShot(GarageOpenSound);
         StartWallAnim.SetTrigger("Open");
-        //game start
+        _source.clip = BgMusic;
+        _source.Play();
     }
 
     public void BoxDestroy()
