@@ -6,6 +6,7 @@ public class Box : MonoBehaviour
 {
     public float DetectionRadius = 5f;
     public float PullSpeed = 2f;
+    public MzlfLvlController LvlController;
 
     private Rigidbody _rb;
     private Transform _playerTransform;
@@ -31,6 +32,13 @@ public class Box : MonoBehaviour
         {
             Vector3 direction = (_playerTransform.position - transform.position).normalized;
             _rb.MovePosition(transform.position + direction * PullSpeed * Time.deltaTime);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("EndZone"))
+        {
+            LvlController.EndGame();
         }
     }
 }

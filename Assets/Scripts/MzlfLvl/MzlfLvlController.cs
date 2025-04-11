@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MzlfLvlController : MonoBehaviour
@@ -17,11 +18,19 @@ public class MzlfLvlController : MonoBehaviour
     public AudioClip GarageOpenSound;
     public AudioClip BgMusic;
     public AudioClip StartSound;
+    public AudioClip EndVoiceSound;
+    public AudioClip EndSound;
+
+    [Header("Other")]
+    public ScreenLoader ScreenLoader;
+    public string SceneToLoad;
 
     [Header("Timer")]
     public float GameTime;
+    public TMP_Text TimerTxt;
 
 
+    private bool _isStarted = false;
     private FirstPersonLook _playerCamera;
     private Pause _pause;
     private FirstPersonMovement _playerMovement;
@@ -37,6 +46,27 @@ public class MzlfLvlController : MonoBehaviour
         _pause = FindAnyObjectByType<Pause>();
         _playerMovement = FindAnyObjectByType<FirstPersonMovement>();
 
+    }
+
+    private void Update()
+    {
+        if(_isStarted)
+        {
+            int minutes; int seconds;
+            minutes = (int)GameTime / 60;
+            seconds = (int)GameTime - minutes * 60;
+
+            TimerTxt.text = $"{minutes} мин {seconds} сек";
+
+            if(GameTime <= 0)
+            {
+                BoxDestroy();
+            }
+            else
+            {
+                GameTime -= Time.deltaTime;
+            }
+        }
     }
 
     public async void Die()
@@ -55,6 +85,7 @@ public class MzlfLvlController : MonoBehaviour
     }
     public void StartTheGame() //на кнопку открывается
     {
+        _isStarted = true;
         Obstacles.SetActive(true);
         _source.PlayOneShot(GarageOpenSound);
         StartWallAnim.SetTrigger("Open");
@@ -66,8 +97,17 @@ public class MzlfLvlController : MonoBehaviour
     {
         Destroy(Box);
         _source.PlayOneShot(BoxDestroySound);
-        //effects;
         Die();
+    }
+    public async void EndGame()
+    {
+        _source.Stop();
+        _source.PlayOneShot(EndSound);
+        await new WaitForSeconds(1);
+        _source.PlayOneShot(EndVoiceSound);
+        await new WaitForSeconds(1.5f);
+        ScreenLoader.LoadScene(SceneToLoad);
+
     }
 
 }
