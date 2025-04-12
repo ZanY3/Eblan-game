@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd233defeb8dd0e468adfb919c7b4a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnSound: {fileID: 8300000, guid: f4cce7fcf18660a409a9f4dc6b0d60d2, type: 3}
+  OnSound: {fileID: 8300000, guid: 05ee0565b9295f6409e073b2c3fd22b8, type: 3}
   ClueTxt: {fileID: 0}
   LeverDoor: {fileID: 0}
 --- !u!82 &6491951929790869951

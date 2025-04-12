@@ -21134,15 +21134,15 @@ PrefabInstance:
       objectReference: {fileID: 663916902}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: easySpeed
-      value: 5
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: hardSpeed
-      value: 5.45
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: normalSpeed
-      value: 5.2
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 1646139158012215464, guid: 4ff4e79a308b1a94e8b6ece2d30658a7, type: 3}
       propertyPath: soundInterval
