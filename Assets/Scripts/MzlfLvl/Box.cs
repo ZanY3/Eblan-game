@@ -10,6 +10,7 @@ public class Box : MonoBehaviour
 
     private Rigidbody _rb;
     private Transform _playerTransform;
+    private bool _isUsed = false;
 
     void Start()
     {
@@ -36,9 +37,10 @@ public class Box : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("EndZone"))
+        if(collision.gameObject.CompareTag("EndZone") && !_isUsed)
         {
             LvlController.EndGame();
+            _isUsed = true;
         }
     }
 }
