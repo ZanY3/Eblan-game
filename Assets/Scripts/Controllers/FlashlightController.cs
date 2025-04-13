@@ -37,7 +37,7 @@ public class FlashlightController : MonoBehaviour
         }
         if (isOn)
         {
-            charge -= Time.deltaTime * 1.8f;
+            charge -= Time.deltaTime * 1.45f;
             if (charge < 0)
                 charge = 0;
         }
