@@ -418,8 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757afc035b1d6834b944dfedcb3e5772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewDistance: 12.5
-  speed: 4.8
   target: {fileID: 0}
   patrolPoints:
   - {fileID: 0}
@@ -441,12 +439,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f7b16c5d68f148c40ac6292f0f8f11cb, type: 3}
   - {fileID: 8300000, guid: ddb7b60a389527641abe8d90f2b25a35, type: 3}
   soundInterval: 6
+  pointStopDistance: 0.25
   gameUi: {fileID: 0}
-  panelUi: {fileID: 0}
+  loseUi: {fileID: 0}
   restartScene: Level 1
   reachedSource: {fileID: 3786591254180365807}
   jumpScareSound: {fileID: 8300000, guid: 19466e23b643921439eb9ef25739931d, type: 3}
   timeBfrRestart: 1
+  hardViewDistance: 10
+  hardSpeed: 3.5
+  normalViewDistance: 9
+  normalSpeed: 3
+  easyViewDistance: 8
+  easySpeed: 2.8
+  speed: 4.8
 --- !u!195 &4073207470455611695
 NavMeshAgent:
   m_ObjectHideFlags: 0
